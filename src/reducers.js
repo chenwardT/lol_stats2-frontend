@@ -1,28 +1,56 @@
 import { combineReducers } from 'redux';
-import { SET_VISIBILITY_FILTER, VisibilityFilters } from './actions';
+import { SET_ROLE_FILTER, ADD_CHAMPIONS, RoleFilters } from './actions';
 
+const { SHOW_ALL } = RoleFilters;
 /**
- * State:
+ * State format:
  * {
- *  nameFilter: champion_name        <str>,
- *  roleFilter: [top|mid|jg|sup|adc] <str>,
- *  sortColumn: column               <str>,
- *  sortDesc:                        <bool>
+ *  nameFilter: championName          <str>
+ *  roleFilter: SHOW_ALL|SHOW_TOP|etc <str>
+ *
+ *  sortColumn: columnName            <str>
+ *  sortDesc:   true|false            <bool>
+ *
+ *  champions: ChampionStats          <array of objs>
  * }
  */
 
-function visibilityFilter(state = ALL, action) {
+function roleFilter(state = SHOW_ALL, action) {
   switch (action.type) {
-    case SET_VISIBILITY_FILTER:
+    case SET_ROLE_FILTER:
       return action.filter;
     default:
       return state;
   }
 }
 
-function stats_table(state = [], action) {
+//function tableSort(state = NAME, action) {
+//  switch (action.type) {
+//    case
+//  }
+//}
+
+function champions(state = [], action) {
   switch (action.type) {
-    case 'FILTER_BY_NAME':
-      return
+    case ADD_CHAMPIONS:
+      return Object.assign({}, state, {
+        champions: action.champions
+      });
+    default:
+      return state;
   }
 }
+
+//function stats_table(state = [], action) {
+//  switch (action.type) {
+//    case 'FILTER_BY_NAME':
+//      return state;
+//  }
+//}
+
+const statsApp = combineReducers({
+  roleFilter,
+  champions
+});
+
+export default statsApp;
