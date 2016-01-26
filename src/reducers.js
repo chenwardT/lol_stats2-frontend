@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_ROLE_FILTER, ADD_CHAMPIONS, RoleFilters } from './actions';
+import { SET_NAME_FILTER, SET_ROLE_FILTER, ADD_CHAMPIONS, RoleFilters } from './actions';
 
 const { SHOW_ALL } = RoleFilters;
 /**
@@ -18,6 +18,15 @@ const { SHOW_ALL } = RoleFilters;
 function roleFilter(state = SHOW_ALL, action) {
   switch (action.type) {
     case SET_ROLE_FILTER:
+      return action.filter;
+    default:
+      return state;
+  }
+}
+
+function nameFilter(state = '', action) {
+  switch (action.type) {
+    case SET_NAME_FILTER:
       return action.filter;
     default:
       return state;
@@ -50,6 +59,7 @@ function champions(state = [], action) {
 
 const statsApp = combineReducers({
   roleFilter,
+  nameFilter,
   champions
 });
 

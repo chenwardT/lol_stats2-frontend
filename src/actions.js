@@ -3,6 +3,7 @@
  */
 export const SET_ROLE_FILTER = 'SET_ROLE_FILTER';
 export const ADD_CHAMPIONS = 'ADD_CHAMPIONS';
+export const SET_NAME_FILTER = 'SET_NAME_FILTER';
 
 /*
  * other constants
@@ -22,6 +23,10 @@ export const RoleFilters = {
 
 export function setRoleFilter(filter) {
   return { type: SET_ROLE_FILTER, filter };
+}
+
+export function setNameFilter(filter) {
+  return { type: SET_NAME_FILTER, filter}
 }
 
 export function addChampions(champions) {

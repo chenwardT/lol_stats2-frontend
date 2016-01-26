@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Router, Route, Link, browserHistory } from 'react-router'
 import { connect } from 'react-redux';
 
-import { RoleFilters, setRoleFilter } from '../actions';
+import { RoleFilters, setRoleFilter, setNameFilter } from '../actions';
 import NameFilter from '../components/NameFilter';
 import RoleFilter from '../components/RoleFilter';
 import StatsTableHeader from '../components/StatsTableHeader';
@@ -16,7 +16,13 @@ export class StatsContainer extends Component {
     return (
       <div>
         <div>
-          <NameFilter />{' '}
+          <NameFilter
+            handleChange={evt => {
+              const nameFilter = evt.target.value;
+              console.log(nameFilter);
+              dispatch(setNameFilter(nameFilter));
+            }}
+          />{' '}
           <label htmlFor="role-filter">Role Filter:</label>{' '}
           <RoleFilter
             handleChange={evt => {
@@ -39,7 +45,7 @@ export class StatsContainer extends Component {
 class StatsTableContainer extends Component {
   constructor(props) {
     super(props);
-    this.sortTable('name');
+    //this.sortTable('name');
   }
 
   sortTable(key, desc) {
@@ -77,8 +83,8 @@ class StatsTableContainer extends Component {
   }
 }
 
-function selectChampions(champions, filter) {
-  switch (filter) {
+function selectChampionsByRole(champions, roleFilter) {
+  switch (roleFilter) {
     case RoleFilters.SHOW_ALL:
       return champions;
     case RoleFilters.SHOW_TOP:
@@ -94,9 +100,18 @@ function selectChampions(champions, filter) {
   }
 }
 
+function selectChampionsByName(champions, name) {
+  return champions.filter(champ => champ.name.indexOf(name) !== -1);
+}
+
+function selectChampions(state) {
+  const selectedChampions = selectChampionsByRole(state.champions, state.roleFilter);
+  return selectChampionsByName(selectedChampions, state.nameFilter);
+}
+
 function select(state) {
   return {
-    visibleChampions: selectChampions(state.champions, state.roleFilter)
+    visibleChampions: selectChampions(state)
   };
 }
 
