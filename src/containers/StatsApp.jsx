@@ -101,7 +101,7 @@ function selectChampionsByRole(champions, roleFilter) {
 }
 
 function selectChampionsByName(champions, name) {
-  return champions.filter(champ => champ.name.indexOf(name) !== -1);
+  return champions.filter(champ => champ.name.toLowerCase().indexOf(name.toLowerCase()) !== -1);
 }
 
 function selectChampions(state) {
