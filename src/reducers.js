@@ -38,8 +38,7 @@ function nameFilter(state = '', action) {
 function championSort(state = {key: NAME}, action) {
   switch (action.type) {
     case SET_SORT:
-      let newDesc = !state.desc;
-      return {key: action.key, desc: newDesc};
+      return {key: action.key, desc: !state.desc};
     default:
       return state;
   }
