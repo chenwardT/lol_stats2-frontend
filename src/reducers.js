@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
-import { SET_NAME_FILTER, SET_ROLE_FILTER, ADD_CHAMPIONS, RoleFilters } from './actions';
+import { SET_NAME_FILTER, SET_ROLE_FILTER, SET_SORT, ADD_CHAMPIONS,
+         RoleFilters, SortKeys } from './actions';
 
 const { SHOW_ALL } = RoleFilters;
+const { NAME } = SortKeys;
 /**
  * State format:
  * {
@@ -33,11 +35,15 @@ function nameFilter(state = '', action) {
   }
 }
 
-//function tableSort(state = NAME, action) {
-//  switch (action.type) {
-//    case
-//  }
-//}
+function championSort(state = {key: NAME}, action) {
+  switch (action.type) {
+    case SET_SORT:
+      let newDesc = !state.desc;
+      return {key: action.key, desc: newDesc};
+    default:
+      return state;
+  }
+}
 
 function champions(state = [], action) {
   switch (action.type) {
@@ -50,16 +56,10 @@ function champions(state = [], action) {
   }
 }
 
-//function stats_table(state = [], action) {
-//  switch (action.type) {
-//    case 'FILTER_BY_NAME':
-//      return state;
-//  }
-//}
-
 const statsApp = combineReducers({
   roleFilter,
   nameFilter,
+  championSort,
   champions
 });
 

@@ -2,8 +2,9 @@
  * action types
  */
 export const SET_ROLE_FILTER = 'SET_ROLE_FILTER';
-export const ADD_CHAMPIONS = 'ADD_CHAMPIONS';
 export const SET_NAME_FILTER = 'SET_NAME_FILTER';
+export const SET_SORT = 'SET_SORT';
+export const ADD_CHAMPIONS = 'ADD_CHAMPIONS';
 
 /*
  * other constants
@@ -17,16 +18,25 @@ export const RoleFilters = {
   SHOW_SUPPORT: 'SHOW_SUPPORT'
 };
 
+export const SortKeys = {
+  NAME: 'NAME',
+  ROLE: 'ROLE',
+  KILLS: 'KILLS'
+};
+
 /*
  * action creators
  */
-
 export function setRoleFilter(filter) {
   return { type: SET_ROLE_FILTER, filter };
 }
 
 export function setNameFilter(filter) {
   return { type: SET_NAME_FILTER, filter}
+}
+
+export function setSort(key, desc) {
+  return { type: SET_SORT, key, desc }
 }
 
 export function addChampions(champions) {

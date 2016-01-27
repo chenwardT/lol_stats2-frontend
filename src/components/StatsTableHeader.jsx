@@ -5,17 +5,13 @@ export default class StatsTableHeader extends Component {
     return (
       <thead>
       <tr>
-        <td onClick={e => {
-          this.props.sortBy('name');
-        }}>Champion</td>
-        <td onClick={e => {
-          this.props.sortBy('role');
-        }}>Role</td>
-        <td >Kills</td>
-        <td >Deaths</td>
-        <td >Assists</td>
-        <td >Minions Killed</td>
-        <td >Gold Earned</td>
+        <td data-key="name" onClick={this.props.handleSortChange}>Champion</td>
+        <td data-key="role" onClick={this.props.handleSortChange}>Role</td>
+        <td data-key="avg_kills" onClick={this.props.handleSortChange}>Kills</td>
+        <td data-key="avg_deaths" onClick={this.props.handleSortChange}>Deaths</td>
+        <td data-key="avg_assists" onClick={this.props.handleSortChange}>Assists</td>
+        <td data-key="avg_minions_killed" onClick={this.props.handleSortChange}>Minions Killed</td>
+        <td data-key="avg_gold_earned" onClick={this.props.handleSortChange}>Gold Earned</td>
       </tr>
       </thead>
     )
