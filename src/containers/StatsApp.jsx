@@ -11,7 +11,7 @@ import StatsTableRow from '../components/StatsTableRow';
 export class StatsContainer extends Component {
   render() {
     // Injected by connect() call
-    const { dispatch, visibleChampions } = this.props;
+    const { dispatch, visibleChampions, sortKey, sortDesc } = this.props;
 
     return (
       <div>
@@ -37,6 +37,8 @@ export class StatsContainer extends Component {
             const key = evt.target.getAttribute('data-key');
             dispatch(setSort(key));
           }}
+          sortKey={sortKey}
+          sortDesc={sortDesc}
         />
       </div>
     )
@@ -49,6 +51,8 @@ class StatsTableContainer extends Component {
       <table className="table">
         <StatsTableHeader
           handleSortChange={this.props.handleSortChange}
+          sortKey={this.props.sortKey}
+          sortDesc={this.props.sortDesc}
         />
         <tbody>
         {this.props.championStats.map(champion =>
@@ -62,6 +66,10 @@ class StatsTableContainer extends Component {
     )
   }
 }
+
+/*
+ * selectors
+ */
 
 function selectChampionsByRole(champions, roleFilter) {
   switch (roleFilter) {

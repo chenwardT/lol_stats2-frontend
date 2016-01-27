@@ -2,16 +2,37 @@ import React, { Component, PropTypes } from 'react';
 
 export default class StatsTableHeader extends Component {
   render() {
+    const rows = [
+      {key: 'name', text: 'Champion'},
+      {key: 'role', text: 'Role'},
+      {key: 'avg_kills', text: 'Kills'},
+      {key: 'avg_deaths', text: 'Deaths'},
+      {key: 'avg_assists', text: 'Assists'},
+      {key: 'avg_minions_killed', text: 'Minions Killed'},
+      {key: 'avg_gold_earned', text: 'Gold Earned'}
+    ];
+
     return (
       <thead>
       <tr>
-        <td data-key="name" onClick={this.props.handleSortChange}>Champion</td>
-        <td data-key="role" onClick={this.props.handleSortChange}>Role</td>
-        <td data-key="avg_kills" onClick={this.props.handleSortChange}>Kills</td>
-        <td data-key="avg_deaths" onClick={this.props.handleSortChange}>Deaths</td>
-        <td data-key="avg_assists" onClick={this.props.handleSortChange}>Assists</td>
-        <td data-key="avg_minions_killed" onClick={this.props.handleSortChange}>Minions Killed</td>
-        <td data-key="avg_gold_earned" onClick={this.props.handleSortChange}>Gold Earned</td>
+        {rows.map(row => {
+          if (this.props.sortKey === row.key) {
+            if (this.props.sortDesc) {
+              row.text = row.text + '▼';
+            } else {
+              row.text = row.text + '▲';
+            }
+          }
+          return (
+            <td
+              key={row.key}
+              data-key={row.key}
+              onClick={this.props.handleSortChange}
+            >
+              {row.text}
+            </td>
+            );
+        })}
       </tr>
       </thead>
     )
