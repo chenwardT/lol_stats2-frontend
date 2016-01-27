@@ -95,9 +95,9 @@ function selectChampionsByName(champions, name) {
 function sortChampions(champions, sortKey, sortDesc) {
   if (sortKey === 'name' || sortKey === 'role' ) {
     if (!sortDesc) {
-      return champions.sort((a, b) => String(a[sortKey]).localeCompare(String(b[sortKey])));
+      return champions.sort((a, b) => String(b[sortKey]).localeCompare(String(a[sortKey])));
     } else {
-      return champions.sort((a, b) => -String(a[sortKey]).localeCompare(String(b[sortKey])));
+      return champions.sort((a, b) => -String(b[sortKey]).localeCompare(String(a[sortKey])));
     }
   } else {
     if (!sortDesc) {

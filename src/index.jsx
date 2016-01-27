@@ -11,7 +11,7 @@ const sampleData = require('./data.json');
 
 // For now, init the store with the sample JSON data.
 // Later, get this from our REST API, e.g. /champion-stats/6.1
-let store = createStore(statsApp, {champions: sampleData, championSort: {key: 'name', desc: false}});
+let store = createStore(statsApp, {champions: sampleData, championSort: {key: 'name', desc: true}});
 
 render(
   <Provider store={store}>
