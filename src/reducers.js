@@ -17,7 +17,7 @@ const { NAME } = SortKeys;
  * }
  */
 
-function roleFilter(state = SHOW_ALL, action) {
+export function roleFilter(state = SHOW_ALL, action) {
   switch (action.type) {
     case SET_ROLE_FILTER:
       return action.filter;
@@ -26,7 +26,7 @@ function roleFilter(state = SHOW_ALL, action) {
   }
 }
 
-function nameFilter(state = '', action) {
+export function nameFilter(state = '', action) {
   switch (action.type) {
     case SET_NAME_FILTER:
       return action.filter;
@@ -35,7 +35,7 @@ function nameFilter(state = '', action) {
   }
 }
 
-function championSort(state = {key: NAME}, action) {
+export function championSort(state = {key: NAME}, action) {
   switch (action.type) {
     case SET_SORT:
       return {key: action.key, desc: !state.desc};
@@ -44,7 +44,7 @@ function championSort(state = {key: NAME}, action) {
   }
 }
 
-function champions(state = [], action) {
+export function champions(state = [], action) {
   switch (action.type) {
     case ADD_CHAMPIONS:
       return Object.assign({}, state, {
@@ -55,11 +55,13 @@ function champions(state = [], action) {
   }
 }
 
-const statsApp = combineReducers({
-  roleFilter,
-  nameFilter,
-  championSort,
-  champions
-});
-
-export default statsApp;
+// Exported the above functions to combine at same level as routeReducer.
+//
+//const statsApp = combineReducers({
+//  roleFilter,
+//  nameFilter,
+//  championSort,
+//  champions
+//});
+//
+//export default statsApp;

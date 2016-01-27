@@ -15,6 +15,7 @@ export class StatsContainer extends Component {
 
     return (
       <div>
+        <Link to={'home'}>Home</Link>
         <div>
           <NameFilter
             handleChange={evt => {

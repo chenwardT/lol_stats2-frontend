@@ -1,23 +1,44 @@
 import React from 'react';
 import { render } from 'react-dom';
-//import { Router, Route, Link, browserHistory, IndexRoute, Redirect } from 'react-router';
-import { createStore } from 'redux';
+import { Router, Route, browserHistory } from 'react-router';
+import { syncHistory, routeReducer } from 'react-router-redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
 import StatsContainer from './containers/StatsApp';
-import statsApp from './reducers';
+import { OverviewContainer } from './containers/Overview';
+import { App } from './containers/App';
+import { roleFilter, nameFilter, championSort, champions } from './reducers';
 
 const sampleData = require('./data.json');
 
-// For now, init the store with the sample JSON data.
-// Later, get this from our REST API, e.g. /champion-stats/6.1
-let store = createStore(statsApp, {champions: sampleData, championSort: {key: 'name', desc: true}});
+const reducer = combineReducers(Object.assign({}, {
+  routing: routeReducer,
+  roleFilter,
+  nameFilter,
+  championSort,
+  champions
+}));
+
+// Sync dispatched route action to the history
+const reduxRouterMiddleware = syncHistory(browserHistory);
+const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware)(createStore);
+
+const store = createStoreWithMiddleware(reducer, {
+  champions: sampleData,
+  championSort: {key: 'name', desc: true}
+});
 
 render(
   <Provider store={store}>
-    <StatsContainer championStats={sampleData} />
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <Route path="overview" component={OverviewContainer} />
+        <Route path="stats" component={StatsContainer} />
+      </Route>
+    </Router>
   </Provider>,
-  document.getElementById('stats-container')
+  document.getElementById('app-container')
 );
 
 // Test update logic
