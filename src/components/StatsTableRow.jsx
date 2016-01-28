@@ -1,6 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
 export default class StatsTableRow extends Component {
+  static propTypes = {
+    perChampionStats: PropTypes.object.isRequired
+  };
+
   render() {
     return (
       <tr>
