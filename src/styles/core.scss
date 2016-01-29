@@ -1,6 +1,7 @@
 :global {
   @import 'base';
   @import 'vendor/normalize';
+  @import url(https://fonts.googleapis.com/css?family=Yellowtail);
 
   // Some best-practice CSS that's useful for most apps
   // Just remove them if they're not what you want
@@ -19,5 +20,54 @@
   *:before,
   *:after {
     box-sizing: inherit;
+  }
+  //--
+
+  /*
+   * CoreLayout
+   */
+
+  .header-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 0px;
+    padding-bottom: 20px;
+    background-color: aliceblue;
+  }
+
+  #summoner-champion-search {
+    //width: 260px;
+  }
+
+  .brand {
+    font-family: 'Yellowtail', cursive;
+    font-size: 1.5em;
+  }
+
+  .title {
+    font-family: 'Yellowtail', cursive;
+    font-size: 3.5em;
+    display: block;
+    text-align: center;
+  }
+
+  .search-container {
+    float: right;
+    margin-right: 10%;
+  }
+
+  .search-input {
+    height: 33px;
+    vertical-align: bottom;
+    margin-bottom: 0px;
+  }
+
+  .search-button {
+    height: 33px;
+    width: 33px;
+  }
+
+  .patch-status {
+    clear: both;
   }
 }
