@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { actions as statsActions, RoleFilters } from '../../redux/modules/stats'
+import { actions as statsActions, RoleFilters } from 'redux/modules/stats'
 import NameFilter from 'components/NameFilter'
 import RoleFilter from 'components/RoleFilter'
 import StatsTableHeader from 'components/StatsTableHeader'
