@@ -1,0 +1,154 @@
+/*
+ * SummonerView
+ */
+
+.matchList {
+  width: 690px;
+}
+
+.match {
+  border: 1px dashed lightblue;
+  font-size: .85em;
+}
+
+.championAndSpells {
+  display: table-cell;
+  width: 84px;
+  vertical-align: middle;
+}
+
+.championImage {
+  display: table-cell;
+}
+
+.championImage > img {
+  height: 56px;
+  width: 56px;
+  border-radius: 30px;
+}
+
+.championName {
+  text-align: center;
+}
+
+.spells {
+  display: table-cell;
+  width: 22px;
+  vertical-align: middle;
+}
+
+.spell {
+  display: block;
+  height: 22px;
+  width: 22px;
+  margin-bottom: 4px;
+  margin-left: 5px;
+}
+
+.spell > img {
+  height: 22px;
+  width: 22px;
+}
+
+.kdaSection {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.kda {
+
+}
+
+.kills {
+
+}
+
+.deaths {
+
+}
+
+.assists {
+
+}
+
+.kdaRatio {
+
+}
+
+.lvlCsWards {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.cs {
+
+}
+
+.wards {
+
+}
+
+.killParticipation {
+
+}
+
+.items {
+  display: table-cell;
+  width: 105px;
+  vertical-align: middle;
+}
+
+.item {
+  display: inline-block;
+  width: 32px;
+  margin: 1px;
+}
+
+.item > img {
+  height: 32px;
+  width: 32px;
+}
+
+.trinket {
+  display: table-cell;
+  width: 32px;
+  vertical-align: middle;
+}
+
+.trinket > img {
+  width: 32px;
+  height: 32px;
+}
+
+.participants {
+  display: table-cell;
+  width: 200px;
+  position: relative;
+  top: -8px;
+  left: 20px;
+  vertical-align: middle;
+}
+
+.team {
+  display: inline-block;
+  width: 100px;
+}
+
+.participant {
+
+}
+
+.participantChampionImage {
+  display: inline-block;
+}
+
+.participantChampionImage > img {
+  height: 16px;
+  width: 16px;
+}
+
+.participantName {
+  display: inline-block;
+}
