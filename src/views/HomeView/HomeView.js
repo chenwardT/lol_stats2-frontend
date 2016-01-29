@@ -14,12 +14,8 @@ const mapStateToProps = (state) => ({
 export class HomeView extends React.Component {
   render () {
     return (
-      <div className='container text-center'>
-        <h1>LoL Stats</h1>
-        <h3>Overview</h3>
-        <Link to='/stats'>Stats</Link>
-        <hr />
-        <Link to='/404'>Go to 404 Page</Link>
+      <div>
+        Overview
       </div>
     )
   }
