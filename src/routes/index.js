@@ -10,11 +10,13 @@ import CoreLayout from 'layouts/CoreLayout/CoreLayout'
 import HomeView from 'views/HomeView/HomeView'
 import NotFoundView from 'views/NotFoundView/NotFoundView'
 import StatsView from 'views/StatsView/StatsView'
+import AboutView from 'views/AboutView/AboutView'
 
 export default (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={HomeView} />
     <Route path='/stats' component={StatsView} />
+    <Route path='/about' component={AboutView} />
     <Route path='/404' component={NotFoundView} />
     <Redirect from='*' to='/404' />
   </Route>
