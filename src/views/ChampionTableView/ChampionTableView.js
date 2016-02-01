@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 import { actions as championTableActions, RoleFilters } from 'redux/modules/championTable'
 import NameFilter from 'components/ChampionTable/NameFilter'
 import RoleFilter from 'components/ChampionTable/RoleFilter'
-import StatsTableHeader from 'components/ChampionTable/StatsTableHeader'
-import StatsTableRow from 'components/ChampionTable/StatsTableRow'
+import TableHeader from 'components/ChampionTable/TableHeader'
+import TableRow from 'components/ChampionTable/TableRow'
 
-export class StatsContainer extends Component {
+export class ChampionTableContainer extends Component {
   static propTypes = {
     visibleChampions: PropTypes.array,
     sortKey: PropTypes.string.isRequired,
@@ -38,7 +38,7 @@ export class StatsContainer extends Component {
             id='role-filter'
           />
         </div>
-        <StatsTableContainer
+        <TableContainer
           championStats={visibleChampions}
           handleSortChange={evt => {
             const key = evt.target.getAttribute('data-key')
@@ -52,7 +52,7 @@ export class StatsContainer extends Component {
   }
 }
 
-class StatsTableContainer extends Component {
+class TableContainer extends Component {
   static propTypes = {
     sortKey: PropTypes.string.isRequired,
     sortDesc: PropTypes.bool.isRequired,
@@ -65,14 +65,14 @@ class StatsTableContainer extends Component {
 
     return (
       <table className='table'>
-        <StatsTableHeader
+        <TableHeader
           handleSortChange={this.props.handleSortChange}
           sortKey={sortKey}
           sortDesc={sortDesc}
         />
         <tbody>
         {this.props.championStats.map(champion =>
-          <StatsTableRow
+          <TableRow
             perChampionStats={champion}
             key={champion.id}
           />
@@ -137,4 +137,4 @@ const mapStateToProps = ({championTable}) => ({
   sortDesc: championTable.sortDesc
 })
 
-export default connect(mapStateToProps, championTableActions)(StatsContainer)
+export default connect(mapStateToProps, championTableActions)(ChampionTableContainer)

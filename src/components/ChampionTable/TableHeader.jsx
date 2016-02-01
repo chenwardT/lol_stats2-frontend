@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-export default class StatsTableHeader extends Component {
+export default class TableHeader extends Component {
   static propTypes = {
     sortKey: PropTypes.string.isRequired,
     sortDesc: PropTypes.bool.isRequired,

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-export default class StatsTableRow extends Component {
+export default class TableRow extends Component {
   static propTypes = {
     perChampionStats: PropTypes.object.isRequired
   };
