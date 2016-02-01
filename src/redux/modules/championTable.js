@@ -42,7 +42,7 @@ export const actions = {
 
 // For now, load data from json file.
 // Later, get from our REST API (e.g. /champion-stats/6.1).
-const sampleData = require('./statsSampleData.json')
+const sampleData = require('./championTableSampleData.json')
 
 export default handleActions({
   [SET_ROLE_FILTER]: (state, {payload}) => (Object.assign({}, state, { roleFilter: payload })),

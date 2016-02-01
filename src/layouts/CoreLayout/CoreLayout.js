@@ -32,7 +32,7 @@ function CoreLayout ({ children }) {
             <ul className='nav navbar-nav'>
               <li><Link to='/'>Home</Link></li>
               <li><Link to='/summoners'>Summoners</Link></li>
-              <li><Link to='/stats'>Champions</Link></li>
+              <li><Link to='/champion-table'>Champions</Link></li>
               <li><Link to='/about'>About</Link></li>
             </ul>
             <ul className='nav navbar-nav navbar-right'>

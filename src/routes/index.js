@@ -10,14 +10,14 @@ import CoreLayout from 'layouts/CoreLayout/CoreLayout'
 import HomeView from 'views/HomeView/HomeView'
 import SummonerView from 'views/SummonerView/SummonerView'
 import NotFoundView from 'views/NotFoundView/NotFoundView'
-import StatsView from 'views/StatsView/StatsView'
+import ChampionTableView from 'views/ChampionTableView/ChampionTableView'
 import AboutView from 'views/AboutView/AboutView'
 
 export default (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={HomeView} />
     <Route path='/summoners' component={SummonerView} />
-    <Route path='/stats' component={StatsView} />
+    <Route path='/champion-table' component={ChampionTableView} />
     <Route path='/about' component={AboutView} />
     <Route path='/404' component={NotFoundView} />
     <Redirect from='*' to='/404' />

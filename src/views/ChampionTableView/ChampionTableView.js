@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { actions as statsActions, RoleFilters } from 'redux/modules/stats'
-import NameFilter from 'components/NameFilter'
-import RoleFilter from 'components/RoleFilter'
-import StatsTableHeader from 'components/StatsTableHeader'
-import StatsTableRow from 'components/StatsTableRow'
+import { actions as championTableActions, RoleFilters } from 'redux/modules/championTable'
+import NameFilter from 'components/ChampionTable/NameFilter'
+import RoleFilter from 'components/ChampionTable/RoleFilter'
+import StatsTableHeader from 'components/ChampionTable/StatsTableHeader'
+import StatsTableRow from 'components/ChampionTable/StatsTableRow'
 
 export class StatsContainer extends Component {
   static propTypes = {
@@ -130,11 +130,11 @@ function selectChampions(champions, roleFilter, nameFilter, sortKey, sortDesc) {
   return sortChampions(selectedChampions, sortKey, sortDesc)
 }
 
-const mapStateToProps = ({stats}) => ({
-  visibleChampions: selectChampions(stats.champions, stats.roleFilter, stats.nameFilter,
-                                    stats.sortKey, stats.sortDesc),
-  sortKey: stats.sortKey,
-  sortDesc: stats.sortDesc
+const mapStateToProps = ({championTable}) => ({
+  visibleChampions: selectChampions(championTable.champions, championTable.roleFilter, championTable.nameFilter,
+                                    championTable.sortKey, championTable.sortDesc),
+  sortKey: championTable.sortKey,
+  sortDesc: championTable.sortDesc
 })
 
-export default connect(mapStateToProps, statsActions)(StatsContainer)
+export default connect(mapStateToProps, championTableActions)(StatsContainer)
