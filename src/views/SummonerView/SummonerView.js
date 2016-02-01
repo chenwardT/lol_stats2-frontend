@@ -10,12 +10,9 @@ export class SummonerContainer extends Component {
   constructor(props) {
     // First, resolve the region + name to the PK of the summoner on the backend
     super(props)
-    console.log(this.props.location)
-    const location = this.props.location.pathname
-    const region = location.split('/')[2]
-    const name = location.split('/')[3]
-    let pk
-
+    const { region, name } = this.props.params
+    console.log(region, name)
+    
     const fetchPKInit = {
       method: 'POST',
       headers: {
@@ -32,11 +29,9 @@ export class SummonerContainer extends Component {
       .then((resp) => resp.json())
       .then((json) => {
         console.log(`/${json.region}/${json.name}`)
-        pk = json.id
-        console.log(pk)
         return json
       })
-      .then((resp) => {
+      .then((json) => {
         // Then use the PK to query the summoner data
         const fetchMatchesInit = {
           method: 'GET',
@@ -45,11 +40,11 @@ export class SummonerContainer extends Component {
             'Content-Type': 'application/json'
           }
         }
-        fetch(`http://laguz:8001/summoner-matches/${resp.id}`, fetchMatchesInit)
+        fetch(`http://laguz:8001/summoner-matches/${json.id}`, fetchMatchesInit)
           .then((resp) => resp.json())
-          .then((resp) => {
-            console.log(`Got ${resp.results.length} results`)
-            this.props.setMatches({results: resp.results})
+          .then((json) => {
+            console.log(`Got ${json.results.length} results`)
+            this.props.setMatches({results: json.results})
           })
       })
   }
