@@ -8,6 +8,7 @@ import { Route, IndexRoute, Redirect } from 'react-router'
 // your current file is.
 import CoreLayout from 'layouts/CoreLayout/CoreLayout'
 import HomeView from 'views/HomeView/HomeView'
+import SummonerOverview from 'views/SummonerOverview/SummonerOverview'
 import SummonerView from 'views/SummonerView/SummonerView'
 import NotFoundView from 'views/NotFoundView/NotFoundView'
 import ChampionTableView from 'views/ChampionTableView/ChampionTableView'
@@ -16,9 +17,8 @@ import AboutView from 'views/AboutView/AboutView'
 export default (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={HomeView} />
-    <Route path='/summoners' component={SummonerView}>
-      <Route path='/summoner/:region/:name' component={SummonerView} />
-    </Route>
+    <Route path='/summoners' component={SummonerOverview} />
+    <Route path='/summoner/:region/:name' component={SummonerView} />
     <Route path='/champion-table' component={ChampionTableView} />
     <Route path='/about' component={AboutView} />
     <Route path='/404' component={NotFoundView} />
