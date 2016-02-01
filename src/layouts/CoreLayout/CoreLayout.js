@@ -64,7 +64,6 @@ function CoreLayout ({ push, children }) {
 
       <div className='row'>
         <div className='view-container col-sm-12'>
-          <button onClick={() => push('/champion-table')}>Go to champ table</button>
           {children}
         </div>
       </div>
