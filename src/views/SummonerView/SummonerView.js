@@ -11,9 +11,8 @@ export class SummonerContainer extends Component {
     // First, resolve the region + name to the PK of the summoner on the backend
     super(props)
     const { region, name } = this.props.params
-    console.log(region, name)
-    
-    const fetchPKInit = {
+
+    fetch('http://laguz:8001/get_pk/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -23,9 +22,7 @@ export class SummonerContainer extends Component {
         'region': region,
         'name': name
       })
-    }
-
-    fetch('http://laguz:8001/get_pk/', fetchPKInit)
+    })
       .then((resp) => resp.json())
       .then((json) => {
         console.log(`/${json.region}/${json.name}`)
@@ -33,14 +30,13 @@ export class SummonerContainer extends Component {
       })
       .then((json) => {
         // Then use the PK to query the summoner data
-        const fetchMatchesInit = {
+        fetch(`http://laguz:8001/summoner-matches/${json.id}`, {
           method: 'GET',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           }
-        }
-        fetch(`http://laguz:8001/summoner-matches/${json.id}`, fetchMatchesInit)
+        })
           .then((resp) => resp.json())
           .then((json) => {
             console.log(`Got ${json.results.length} results`)
@@ -71,8 +67,8 @@ export class SummonerContainer extends Component {
  * Selectors
  */
 
-const mapStateToProps = (state) => ({
-
+const mapStateToProps = ({summoner}) => ({
+  matches: summoner.matches
 })
 
 export default connect(mapStateToProps, summonerActions)(SummonerContainer)
