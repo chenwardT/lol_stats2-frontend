@@ -3,15 +3,15 @@ import { createAction, handleActions } from 'redux-actions'
 /*
  * Constants
  */
-export const GET_MATCHES = 'GET_MATCHES'
+export const SET_MATCHES = 'SET_MATCHES'
 
 /*
  * Actions
  */
-export const getMatches = createAction(GET_MATCHES)
+export const setMatches = createAction(SET_MATCHES)
 
 export const actions = {
-  getMatches
+  setMatches
 }
 
 /*
@@ -20,7 +20,7 @@ export const actions = {
 const sampleData = require('./summonerSampleData.json')
 
 export default handleActions({
-  [GET_MATCHES]: (state, {payload}) => (Object.assign({}, state, { matches: payload.results }))
+  [SET_MATCHES]: (state, {payload}) => (Object.assign({}, state, { matches: payload.results }))
 }, {
   matches: sampleData.results
 })
