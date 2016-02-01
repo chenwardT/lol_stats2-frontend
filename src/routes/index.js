@@ -16,7 +16,9 @@ import AboutView from 'views/AboutView/AboutView'
 export default (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={HomeView} />
-    <Route path='/summoners' component={SummonerView} />
+    <Route path='/summoners' component={SummonerView}>
+      <Route path='/summoner/:region/:name' component={SummonerView} />
+    </Route>
     <Route path='/champion-table' component={ChampionTableView} />
     <Route path='/about' component={AboutView} />
     <Route path='/404' component={NotFoundView} />
