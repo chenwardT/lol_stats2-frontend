@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react'
 import '../../styles/core.scss'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
+import { routeActions } from 'react-router-redux'
+import SearchBox from 'components/SearchBox'
 
 // Note: Stateless/function components *will not* hot reload!
 // react-transform *only* works on component classes.
@@ -11,7 +14,7 @@ import { Link } from 'react-router'
 //
 // CoreLayout is a pure function of its props, so we can
 // define it with a plain javascript function...
-function CoreLayout ({ children }) {
+function CoreLayout ({ push, children }) {
   return (
     <div className='page-container'>
       <nav className='navbar navbar-default'>
@@ -38,12 +41,7 @@ function CoreLayout ({ children }) {
             <ul className='nav navbar-nav navbar-right'>
               <li><a href='#'>Social Media</a></li>
             </ul>
-            <form className='navbar-form navbar-left' role='search'>
-              <div className='form-group'>
-                <input type='text' id='summoner-champion-search' className='form-control' placeholder='Summoner or Champion' />
-                <button className='btn btn-default'><span className='glyphicon glyphicon-search' /></button>
-              </div>
-            </form>
+            <SearchBox push={push} />
           </div>{/* /.navbar-collapse */}
         </div>{/* /.container-fluid */}
       </nav>
@@ -66,6 +64,7 @@ function CoreLayout ({ children }) {
 
       <div className='row'>
         <div className='view-container col-sm-12'>
+          <button onClick={() => push('/champion-table')}>Go to champ table</button>
           {children}
         </div>
       </div>
@@ -77,4 +76,7 @@ CoreLayout.propTypes = {
   children: PropTypes.element
 }
 
-export default CoreLayout
+export default connect(
+  null,
+  routeActions
+)(CoreLayout)
