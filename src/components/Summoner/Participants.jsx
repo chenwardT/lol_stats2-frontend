@@ -14,7 +14,7 @@ export default class Participants extends Component {
       <div className={classes.participants}>
         <div className={classes.team}>
           {participantSet.slice(0, 5).map((ele, idx) => (
-            <div className={classes.participant}>
+            <div key={idx} className={classes.participant}>
               <div className={classes.participantChampionImage}>
                 <img src='http://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/Lux.png' />
               </div>
@@ -26,7 +26,7 @@ export default class Participants extends Component {
         </div>
         <div className={classes.team}>
           {participantSet.slice(5).map((ele, idx) => (
-          <div className={classes.participant}>
+          <div key={idx + 5} className={classes.participant}>
             <div className={classes.participantChampionImage}>
               <img src='http://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/Lux.png' />
             </div>
