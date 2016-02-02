@@ -1,6 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
-export default class SearchBox extends Component {
+import { actions as summonerActions } from 'redux/modules/summoner'
+
+export class SearchBox extends Component {
+  static propTypes = {
+    push: PropTypes.func
+  };
+
   sendRequest(region, name) {
     console.log(`Send request: ${region}, ${name}`)
 
@@ -19,8 +26,26 @@ export default class SearchBox extends Component {
     fetch('http://laguz:8001/get_pk/', fetchInit)
       .then((resp) => resp.json())
       .then((json) => {
-        console.log(`/${json.region}/${json.name}`)
+        console.log(`Got canonical name: [${json.region}] ${json.name}`)
+        this.props.clearMatches()
         this.props.push(`/summoner/${json.region}/${json.name}`)
+        return json
+      })
+      .then((json) => {
+        // Then use the PK to query the summoner data
+        console.log('Getting summoner-matches by PK')
+        fetch(`http://laguz:8001/summoner-matches/${json.id}`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        })
+          .then((resp) => resp.json())
+          .then((json) => {
+            console.log(`Got ${json.results.length} results`)
+            this.props.setMatches({results: json.results})
+          })
       })
   }
 
@@ -61,3 +86,5 @@ export default class SearchBox extends Component {
     )
   }
 }
+
+export default connect(null, summonerActions)(SearchBox)
