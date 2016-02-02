@@ -155,4 +155,9 @@
 
 .participantName {
   display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 84px;
 }
