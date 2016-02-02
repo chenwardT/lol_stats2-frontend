@@ -4,7 +4,7 @@ import classes from './SummonerView.scss'
 
 import { actions as summonerActions } from 'redux/modules/summoner'
 import { Header } from 'components/Summoner/Header'
-import { Match } from 'components/Summoner/Match'
+import Match from 'components/Summoner/Match'
 
 export class SummonerContainer extends Component {
   constructor(props) {
@@ -53,8 +53,12 @@ export class SummonerContainer extends Component {
         </div>
         <div className='row'>
           <div className={'col-sm-12 ' + classes.matchList}>
-            {Array.from(Array(10).keys()).map(() => (
-              <Match />
+            {this.props.matches.map((matchData) => (
+              <Match
+                matchData={matchData}
+                name={this.props.params.name}
+                key={matchData.match_id}
+              />
             ))}
           </div>
         </div>
