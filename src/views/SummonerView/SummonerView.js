@@ -13,54 +13,75 @@ export class SummonerContainer extends Component {
     matches: PropTypes.any
   };
 
-    fetch('http://laguz:8001/get_pk/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'region': region,
-        'name': name
-      })
-    })
-      .then((resp) => resp.json())
-      .then((json) => {
-        console.log(`/${json.region}/${json.name}`)
-        return json
-      })
-      .then((json) => {
-        // Then use the PK to query the summoner data
-        fetch(`http://laguz:8001/summoner-matches/${json.id}`, {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
+  componentWillMount() {
+    // We'll have no matches if the user navigated directly to a summoner detail
+    // page, so we get the data here instead of upon navigation from SearchBox's
+    // route push.
+    if (this.props.matches === 'loading') {
+      const { region, name } = this.props.params
+      console.log(`Send request: ${region}, ${name}`)
+
+      fetch('http://laguz:8001/get_pk/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'region': region,
+          'name': name
         })
-          .then((resp) => resp.json())
-          .then((json) => {
-            console.log(`Got ${json.results.length} results`)
-            this.props.setMatches({results: json.results})
-          })
       })
+        .then((resp) => resp.json())
+        .then((json) => {
+          console.log(`Got canonical name: [${json.region}] ${json.name}`)
+          return json
+        })
+        .then((json) => {
+          // Then use the PK to query the summoner data
+          console.log('Getting summoner-matches by PK')
+          fetch(`http://laguz:8001/summoner-matches/${json.id}`, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          })
+            .then((resp) => resp.json())
+            .then((json) => {
+              console.log(`Got ${json.results.length} results`)
+              this.props.setMatches({results: json.results})
+            })
+        })
+    }
+  }
+
+  getContentOrLoadingMsg() {
+    // TODO: Improve: Indicator? Re-sending of request if it errors out?
+    if (this.props.matches === 'loading' || typeof this.props.matches === 'undefined') {
+      return (
+        <span className={classes.loadingText}>Loading...</span>
+      )
+    } else {
+      return (this.props.matches.map((matchData) => (
+        <Match
+          matchData={matchData}
+          name={this.props.params.name}
+          key={matchData.match_id}
+        />
+      )))
+    }
   }
 
   render() {
     return (
       <div className='summoner-view-container container-fluid'>
         <div className='row'>
-          <Header header={{summonerName: 'Ronfar'}} />
+          <Header header={{summonerName: this.props.params.name}} />
         </div>
         <div className='row'>
           <div className={'col-sm-12 ' + classes.matchList}>
-            {this.props.matches.map((matchData) => (
-              <Match
-                matchData={matchData}
-                name={this.props.params.name}
-                key={matchData.match_id}
-              />
-            ))}
+            {this.getContentOrLoadingMsg()}
           </div>
         </div>
       </div>
