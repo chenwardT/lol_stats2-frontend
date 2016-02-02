@@ -7,10 +7,11 @@ import { Header } from 'components/Summoner/Header'
 import Match from 'components/Summoner/Match'
 
 export class SummonerContainer extends Component {
-  constructor(props) {
-    // First, resolve the region + name to the PK of the summoner on the backend
-    super(props)
-    const { region, name } = this.props.params
+  static propTypes = {
+    params: PropTypes.object,
+    setMatches: PropTypes.func,
+    matches: PropTypes.any
+  };
 
     fetch('http://laguz:8001/get_pk/', {
       method: 'POST',
