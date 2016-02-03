@@ -10,7 +10,7 @@ export default class AboutView extends Component {
           <ul>
             <li>North America</li>
             <li>Europe West</li>
-            <li>Europe Northeast</li>
+            <li>Europe Nordic East</li>
             <li>Korea</li>
             <li>Brazil</li>
             <li>Latin America North</li>
