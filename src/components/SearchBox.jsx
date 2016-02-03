@@ -9,7 +9,7 @@ export class SearchBox extends Component {
   };
 
   sendRequest(region, name) {
-    console.log(`Send request: ${region}, ${name}`)
+    console.log(`SearchBox: Send request: ${region}, ${name}`)
 
     const fetchInit = {
       method: 'POST',
@@ -26,14 +26,14 @@ export class SearchBox extends Component {
     fetch('http://laguz:8001/get_pk/', fetchInit)
       .then((resp) => resp.json())
       .then((json) => {
-        console.log(`Got canonical name: [${json.region}] ${json.name}`)
+        console.log(`SearchBox: Got canonical name: [${json.region}] ${json.name}`)
         this.props.clearMatches()
         this.props.push(`/summoner/${json.region}/${json.name}`)
         return json
       })
       .then((json) => {
         // Then use the PK to query the summoner data
-        console.log('Getting summoner-matches by PK')
+        console.log('SearchBox: Getting summoner-matches by PK')
         fetch(`http://laguz:8001/summoner-matches/${json.id}`, {
           method: 'GET',
           headers: {
@@ -43,7 +43,7 @@ export class SearchBox extends Component {
         })
           .then((resp) => resp.json())
           .then((json) => {
-            console.log(`Got ${json.results.length} results`)
+            console.log(`SearchBox: Got ${json.results.length} results`)
             this.props.setMatches({results: json.results})
           })
       })

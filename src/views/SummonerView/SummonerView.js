@@ -19,7 +19,7 @@ export class SummonerContainer extends Component {
     // route push.
     if (this.props.matches === 'loading') {
       const { region, name } = this.props.params
-      console.log(`Send request: ${region}, ${name}`)
+      console.log(`SummonerView: Send request: ${region}, ${name}`)
 
       fetch('http://laguz:8001/get_pk/', {
         method: 'POST',
@@ -34,12 +34,11 @@ export class SummonerContainer extends Component {
       })
         .then((resp) => resp.json())
         .then((json) => {
-          console.log(`Got canonical name: [${json.region}] ${json.name}`)
+          console.log(`SummonerView: Got canonical name: [${json.region}] ${json.name}`)
           return json
         })
         .then((json) => {
-          // Then use the PK to query the summoner data
-          console.log('Getting summoner-matches by PK')
+          console.log('SummonerView: Getting summoner-matches by PK')
           fetch(`http://laguz:8001/summoner-matches/${json.id}`, {
             method: 'GET',
             headers: {
@@ -49,7 +48,7 @@ export class SummonerContainer extends Component {
           })
             .then((resp) => resp.json())
             .then((json) => {
-              console.log(`Got ${json.results.length} results`)
+              console.log(`SummonerView: Got ${json.results.length} results`)
               this.props.setMatches({results: json.results})
             })
         })
