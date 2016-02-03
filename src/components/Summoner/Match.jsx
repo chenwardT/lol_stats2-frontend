@@ -48,8 +48,10 @@ export default class Match extends Component {
   render() {
     const { matchData } = this.props
     const participantIDOfQueried = this.getParticipantID(matchData.participantidentity_set)
-    const participantDataOfQueried = this.getParticipantData(matchData.participant_set, participantIDOfQueried)
-    const totalKillsOfTeamOfQueried = this.getTotalKills(matchData.participant_set, participantIDOfQueried)
+    const participantDataOfQueried = this.getParticipantData(matchData.participant_set,
+                                                             participantIDOfQueried)
+    const totalKillsOfTeamOfQueried = this.getTotalKills(matchData.participant_set,
+                                                         participantIDOfQueried)
     const killParticipation = (participantDataOfQueried.kills + participantDataOfQueried.assists) /
                               totalKillsOfTeamOfQueried
 
