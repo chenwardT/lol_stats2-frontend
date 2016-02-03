@@ -12,6 +12,12 @@ class CoreLayout extends Component {
   // Get site-wide data.
   componentWillMount() {
     console.log('Core WillMount')
+    this.fetchChampionStaticData()
+    this.fetchSpellStaticData()
+    this.fetchItemStaticData()
+  }
+
+  fetchChampionStaticData() {
     fetch('http://laguz:8001/champions/', {
       method: 'GET',
       headers: {
@@ -22,7 +28,41 @@ class CoreLayout extends Component {
       .then(resp => resp.json())
       .then(json => {
         this.props.setStaticChampionData(json)
+        console.log('Done with champ fetch')
       })
+    console.log('End of champ fetch fn')
+  }
+
+  fetchSpellStaticData() {
+    fetch('http://laguz:8001/spells/', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'applications/json'
+      }
+    })
+      .then(resp => resp.json())
+      .then(json => {
+        this.props.setStaticSpellData(json)
+        console.log('Done with spell fetch')
+      })
+    console.log('End of spell fetch fn')
+  }
+
+  fetchItemStaticData() {
+    fetch('http://laguz:8001/items/', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'applications/json'
+      }
+    })
+      .then(resp => resp.json())
+      .then(json => {
+        this.props.setStaticItemData(json)
+        console.log('Done with item fetch')
+      })
+    console.log('End of item fetch fn')
   }
 
   render() {
@@ -91,15 +131,11 @@ CoreLayout.propTypes = {
   children: PropTypes.element
 }
 
-const mapStateToProps = ({core}) => ({
-  champions: core.champions
-})
-
 const mapDispatchToProps = (dispatch) => (
   bindActionCreators(Object.assign({}, coreActions, routeActions), dispatch)
 )
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(CoreLayout)
