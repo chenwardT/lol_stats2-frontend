@@ -67,6 +67,9 @@ export class SummonerContainer extends Component {
           matchData={matchData}
           name={this.props.params.name}
           key={matchData.match_id}
+          champions={this.props.champions}
+          spells={this.props.spells}
+          items={this.props.items}
         />
       )))
     }
@@ -92,8 +95,11 @@ export class SummonerContainer extends Component {
  * Selectors
  */
 
-const mapStateToProps = ({summoner}) => ({
-  matches: summoner.matches
+const mapStateToProps = (state) => ({
+  matches: state.summoner.matches,
+  champions: state.core.champions,
+  spells: state.core.spells,
+  items: state.core.items
 })
 
 export default connect(mapStateToProps, summonerActions)(SummonerContainer)
