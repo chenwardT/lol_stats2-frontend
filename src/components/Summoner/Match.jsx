@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { ChampionAndSpells } from './ChampionAndSpells'
+import ChampionAndSpells from './ChampionAndSpells'
 import KDA from './KDA'
 import LevelWardsCS from './LevelWardsCS'
 import { Items } from './Items'
@@ -61,18 +61,29 @@ export default class Match extends Component {
           {matchData.queue_type}{' '}{matchData.match_creation}
         </div>
         <div className={classes.matchStats}>
-          <ChampionAndSpells participantData={participantDataOfQueried} />
+          <ChampionAndSpells
+            participantData={participantDataOfQueried}
+            champions={this.props.champions}
+            spells={this.props.spells}
+          />
           <KDA participantData={participantDataOfQueried} />
           <LevelWardsCS
             participantData={participantDataOfQueried}
             matchDuration={matchData.match_duration}
             killParticipation={killParticipation}
           />
-          <Items participantData={participantDataOfQueried} />
-          <Trinket participantData={participantDataOfQueried} />
+          <Items
+            participantData={participantDataOfQueried}
+            items={this.props.items}
+          />
+          <Trinket
+            participantData={participantDataOfQueried}
+            items={this.props.items}
+          />
           <Participants
             participantSet={matchData.participant_set}
             participantIdentitySet={matchData.participantidentity_set}
+            champions={this.props.champions}
           />
         </div>
       </div>
