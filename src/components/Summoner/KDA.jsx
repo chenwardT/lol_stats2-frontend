@@ -15,7 +15,7 @@ export default class KDA extends Component {
       return <span className={classes.kdaText}>{((kills + assists) / deaths).toFixed(2)} KDA</span>
     }
   }
-  
+
   render() {
     const { kills, deaths, assists } = this.props.participantData
 
