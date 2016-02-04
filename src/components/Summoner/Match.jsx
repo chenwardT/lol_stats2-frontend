@@ -1,14 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 import ChampionAndSpells from './ChampionAndSpells'
 import KDA from './KDA'
 import LevelWardsCS from './LevelWardsCS'
-import { Items } from './Items'
+import Items from './Items'
 import { Trinket } from './Trinket'
 import Participants from './Participants'
 import classes from 'views/SummonerView/SummonerView.scss'
 
 export default class Match extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    matchData: PropTypes.object.isRequired,
+    spells: PropTypes.array.isRequired,
+    champions: PropTypes.array.isRequired
+  };
+
   // Get the participantID of the queried summoner for this match.
   // Used to populate children.
   getParticipantID(participantIdentitySet) {
@@ -72,14 +79,8 @@ export default class Match extends Component {
             matchDuration={matchData.match_duration}
             killParticipation={killParticipation}
           />
-          <Items
-            participantData={participantDataOfQueried}
-            items={this.props.items}
-          />
-          <Trinket
-            participantData={participantDataOfQueried}
-            items={this.props.items}
-          />
+          <Items participantData={participantDataOfQueried} />
+          <Trinket participantData={participantDataOfQueried} />
           <Participants
             participantSet={matchData.participant_set}
             participantIdentitySet={matchData.participantidentity_set}

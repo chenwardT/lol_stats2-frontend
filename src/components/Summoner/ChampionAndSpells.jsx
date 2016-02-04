@@ -3,6 +3,12 @@ import React, { Component, PropTypes } from 'react'
 import classes from 'views/SummonerView/SummonerView.scss'
 
 export default class ChampionAndSpells extends Component {
+  static propTypes = {
+    participantData: PropTypes.object.isRequired,
+    champions: PropTypes.array.isRequired,
+    spells: PropTypes.array.isRequired
+  };
+
   render() {
     const {participantData, champions, spells} = this.props
     const champion = champions.filter((champ) =>

@@ -5,7 +5,9 @@ import { actions as summonerActions } from 'redux/modules/summoner'
 
 export class SearchBox extends Component {
   static propTypes = {
-    push: PropTypes.func
+    push: PropTypes.func.isRequired,
+    setMatches: PropTypes.func.isRequired,
+    clearMatches: PropTypes.func.isRequired
   };
 
   sendRequest(region, name) {

@@ -1,8 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 import classes from 'views/SummonerView/SummonerView.scss'
 
 export default class Participants extends Component {
+  static propTypes = {
+    participantSet: PropTypes.array.isRequired,
+    participantIdentitySet: PropTypes.array.isRequired
+  };
+
   render() {
     let { participantSet, participantIdentitySet } = this.props
 

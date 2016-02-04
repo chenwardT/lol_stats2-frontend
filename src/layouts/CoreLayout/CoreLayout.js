@@ -9,6 +9,13 @@ import { actions as coreActions } from 'redux/modules/core'
 import SearchBox from 'components/SearchBox'
 
 class CoreLayout extends Component {
+  static propTypes = {
+    setStaticChampionData: PropTypes.func.isRequired,
+    setStaticSpellData: PropTypes.func.isRequired,
+    setStaticItemData: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired
+  };
+
   // Get site-wide data.
   componentWillMount() {
     console.log('Core WillMount')

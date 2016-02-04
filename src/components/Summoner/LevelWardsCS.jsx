@@ -1,8 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 import classes from 'views/SummonerView/SummonerView.scss'
 
 export default class LevelWardsCS extends Component {
+  static propTypes = {
+    killParticipation: PropTypes.number.isRequired,
+    participantData: PropTypes.object.isRequired,
+    matchDuration: PropTypes.number.isRequired
+  };
+
   render() {
     const totalMinionsKilled = this.props.participantData.minions_killed +
       this.props.participantData.neutral_minions_killed

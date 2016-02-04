@@ -10,7 +10,14 @@ export class SummonerContainer extends Component {
   static propTypes = {
     params: PropTypes.object,
     setMatches: PropTypes.func,
-    matches: PropTypes.any
+    matches: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.undefined,
+      PropTypes.array
+    ]),
+    champions: PropTypes.array.isRequired,
+    spells: PropTypes.array.isRequired,
+    items: PropTypes.array.isRequired
   };
 
   componentWillMount() {
